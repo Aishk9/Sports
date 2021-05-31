@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.oss.bean.Card;
-import com.cg.oss.bean.Payment;
+
 import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.ICardService;
 import com.cg.oss.service.ICardServiceException;
-import com.cg.oss.service.IPaymentService;
-import com.cg.oss.service.IPaymentServiceException;
+
 
 @RestController
 public class ICardController {
