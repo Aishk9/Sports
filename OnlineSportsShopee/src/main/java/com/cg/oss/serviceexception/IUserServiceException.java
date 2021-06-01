@@ -1,4 +1,6 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceexception;
+
+
 
 public class IUserServiceException extends Exception {
 

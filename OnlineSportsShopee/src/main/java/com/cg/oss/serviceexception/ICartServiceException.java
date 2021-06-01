@@ -1,4 +1,5 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceexception;
+
 
 public class ICartServiceException extends Exception{
     private static final long serialVersionUID = -470180507998010368L;

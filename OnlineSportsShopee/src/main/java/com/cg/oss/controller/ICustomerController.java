@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.oss.bean.Customer;
 import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.ICustomerService;
-import com.cg.oss.service.ICustomerServiceException;
+import com.cg.oss.serviceexception.ICustomerServiceException;
+
 
 @RestController
 public class ICustomerController {

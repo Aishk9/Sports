@@ -3,6 +3,7 @@ import java.util.List;
 
 
 import com.cg.oss.bean.Payment;
+import com.cg.oss.serviceexception.IPaymentServiceException;
 
 public interface IPaymentService {
 	public Payment addPayment(Payment payment);

@@ -1,4 +1,4 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.Payment;
 import com.cg.oss.dao.IPaymentRepository;
+import com.cg.oss.service.IPaymentService;
+import com.cg.oss.serviceexception.IPaymentServiceException;
 
 
 
@@ -25,10 +27,10 @@ public class IPaymentServiceImpl implements IPaymentService {
 	}
 
 	@Override
-	public Payment deletePayment(long paymentId) {
+	public Payment deletePayment(long paymentId) throws IPaymentServiceException {
         Optional<Payment> payment =  payRepo.findById(paymentId);
         if(!payment.isPresent()) {
-            return new Payment();
+        	throw new IPaymentServiceException("Payment not present") ;
         }
         payRepo.delete(payment.get());
         return payment.get();
@@ -41,10 +43,10 @@ public class IPaymentServiceImpl implements IPaymentService {
 	}
 
 	@Override
-	public Payment getPaymentDetails(long paymentId) {
+	public Payment getPaymentDetails(long paymentId) throws IPaymentServiceException {
 		Optional<Payment> payment =  payRepo.findById(paymentId);
         if(!payment.isPresent()) {
-            return new Payment();
+        	throw new IPaymentServiceException("Payment not present") ;
         }
         return payment.get();
 	}

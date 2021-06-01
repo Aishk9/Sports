@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="Orders")
+@Table(name="OrderNew")
 public class Order {
     @Id
     private long orderId;

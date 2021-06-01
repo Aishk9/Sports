@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Id;
 
 import com.cg.oss.bean.Address;
+import com.cg.oss.serviceexception.IAddressServiceException;
 
 public interface IAddressService {
 public Address addAddress(Address address);

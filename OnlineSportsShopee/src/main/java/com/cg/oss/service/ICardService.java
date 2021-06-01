@@ -3,6 +3,7 @@ package com.cg.oss.service;
 import java.util.List;
 
 import com.cg.oss.bean.Card;
+import com.cg.oss.serviceexception.ICardServiceException;
 
 public interface ICardService {
 	 public Card addCard(Card card);

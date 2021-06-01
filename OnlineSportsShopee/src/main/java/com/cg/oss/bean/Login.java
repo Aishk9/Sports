@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
- 
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +17,9 @@ import lombok.Setter;
 import lombok.ToString;
 
  
-
+@Component
 @Entity
+@Table(name="LoginNew")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -1,18 +1,20 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
 
- 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
- 
 
 
 import com.cg.oss.bean.User;
 import com.cg.oss.dao.IUserRepository;
+import com.cg.oss.service.IUserService;
+import com.cg.oss.serviceexception.IUserServiceException;
+
+ 
+
+ 
 
  
 
@@ -21,8 +23,16 @@ public class IUserServiceImpl implements IUserService {
 
  
 
+ 
+
+ 
+
     @Autowired
     IUserRepository regRepo;
+
+ 
+
+ 
 
  
 
@@ -32,7 +42,15 @@ public class IUserServiceImpl implements IUserService {
 
  
 
+ 
+
+ 
+
     }
+
+ 
+
+ 
 
  
 
@@ -43,8 +61,14 @@ public class IUserServiceImpl implements IUserService {
             throw new IUserServiceException();
         }
 
+ 
+
         return optional.get();
     }
+
+ 
+
+ 
 
  
 
@@ -55,12 +79,16 @@ public class IUserServiceImpl implements IUserService {
 
  
 
+ 
+
+ 
+
     @Override
     public User changeUserPassword(User user) throws IUserServiceException {
         User dbUser = getUser(user);
         Optional<User> use = regRepo.findById(dbUser.getUsername());
         if(!use.isPresent()) {
-        	throw new IUserServiceException();
+            throw new IUserServiceException();
         }
         if (isNullOrEmpty(dbUser.getPassword())) {
             dbUser.setPassword(user.getPassword());
@@ -72,9 +100,17 @@ public class IUserServiceImpl implements IUserService {
 
  
 
+ 
+
+ 
+
     private boolean isNullOrEmpty(String value) {
         return value != null && !value.equals("");
     }
+
+ 
+
+ 
 
  
 
@@ -89,6 +125,10 @@ public class IUserServiceImpl implements IUserService {
 
  
 
+ 
+
+ 
+
     @Override
     public User deleteUserByUserId(String userid) throws IUserServiceException{
         Optional<User> optional = regRepo.findById(userid);
@@ -100,16 +140,10 @@ public class IUserServiceImpl implements IUserService {
     }
 }
 
+ 
 
+ 
 
+ 
 
-
-
-
-
-
-
-
-
-
-
+ 

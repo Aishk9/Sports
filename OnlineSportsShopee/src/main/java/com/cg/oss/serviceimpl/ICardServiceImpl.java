@@ -1,4 +1,4 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.Card;
 import com.cg.oss.dao.ICardRepository;
+import com.cg.oss.service.ICardService;
+import com.cg.oss.serviceexception.ICardServiceException;
 
 @Service
 public class ICardServiceImpl implements ICardService {
@@ -23,10 +25,10 @@ public Card addCard(Card card) {
 }
 
 @Override
-public Card deleteCard(String id) {
+public Card deleteCard(String id)  throws ICardServiceException {
 	Optional<Card> card =  cardRepo.findById(id);
     if(!card.isPresent()) {
-        return new Card();
+    	throw new ICardServiceException("No Card Details Found For Deletion");
     }
     cardRepo.delete(card.get());
     return card.get();
@@ -41,10 +43,10 @@ public Card updateCard(String id, Card card) {
 }
 
 @Override
-public Card getCardDetails(String id) {
+public Card getCardDetails(String id)  throws ICardServiceException{
 	Optional<Card> card =  cardRepo.findById(id);
     if(!card.isPresent()) {
-        return new Card();
+    	throw new ICardServiceException("No Card Details Found");
     }
   
     return card.get();

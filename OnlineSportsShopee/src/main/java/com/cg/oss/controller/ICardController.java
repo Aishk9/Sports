@@ -13,7 +13,8 @@ import com.cg.oss.bean.Card;
 
 import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.ICardService;
-import com.cg.oss.service.ICardServiceException;
+import com.cg.oss.serviceexception.ICardServiceException;
+
 
 
 @RestController

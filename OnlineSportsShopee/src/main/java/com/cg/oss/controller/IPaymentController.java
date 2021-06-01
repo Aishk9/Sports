@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.oss.bean.Payment;
 import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.IPaymentService;
-import com.cg.oss.service.IPaymentServiceException;
+import com.cg.oss.serviceexception.IPaymentServiceException;
+
 
 @RestController
 public class IPaymentController {

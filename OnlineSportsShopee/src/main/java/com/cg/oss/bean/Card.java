@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
+@Table(name="CardNew")
 public class Card {
 	
 	@Id

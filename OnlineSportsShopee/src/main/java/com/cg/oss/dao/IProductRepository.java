@@ -20,7 +20,7 @@ public interface IProductRepository extends JpaRepository<Product,Long>{
 
     public List<Product> findByProductName(String productName);
     
-    public List<Product> findBySizevar(String sizevar);
+    public List<Product> findByProductSize(String sizevar);
     
     public List<Product> findByMrp(double price);
     

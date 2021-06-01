@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
- 
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,14 +17,15 @@ import lombok.Setter;
 import lombok.ToString;
 
  
-
+@Component
 @Entity
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="user1")
+@Table(name="UserNew")
 public class User {
     //Userid Validation
     

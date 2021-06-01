@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.oss.bean.Address;
 import com.cg.oss.service.IAddressService;
-import com.cg.oss.service.IAddressServiceException;
+import com.cg.oss.serviceexception.IAddressServiceException;
+
 
 @RestController
 public class IAddressController {

@@ -1,4 +1,5 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceexception;
+
 
 public class IPaymentServiceException extends Exception {
 

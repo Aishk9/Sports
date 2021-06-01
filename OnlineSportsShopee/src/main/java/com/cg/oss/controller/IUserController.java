@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.oss.bean.User;
 import com.cg.oss.service.IUserService;
-import com.cg.oss.service.IUserServiceException;
+import com.cg.oss.serviceexception.IUserServiceException;
+
 
  
 

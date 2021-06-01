@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
- 
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
+@Table(name="ProductNew")
 public class Product {
     @Id
     private long productId;
@@ -24,7 +24,7 @@ public class Product {
     private String description;
     private String brand; 
     private String color;
-    private String size;
+    private String productSize;
     private double mrp;
     private int discount;
     private double priceAfterDiscount;
@@ -37,7 +37,7 @@ public class Product {
         
     }
     public Product(long productId, String productName, String category, String description, String brand, String color,
-            String size, double mrp, int discount, double priceAfterDiscount,
+            String productSize, double mrp, int discount, double priceAfterDiscount,
             LocalDate estimatedDelivery) {
         super();
         this.productId = productId;
@@ -46,7 +46,7 @@ public class Product {
         this.description = description;
         this.brand = brand;
         this.color = color;
-        this.size = size;
+        this.productSize = productSize;
         this.mrp = mrp;
         this.discount = discount;
         this.priceAfterDiscount = priceAfterDiscount;
@@ -89,11 +89,11 @@ public class Product {
     public void setColor(String color) {
         this.color = color;
     }
-    public String getSize() {
-        return size;
+    public String getproductSize() {
+        return productSize;
     }
-    public void setSize(String size) {
-        this.size = size;
+    public void setproductSize(String productSize) {
+        this.productSize = productSize;
     }
     public double getMrp() {
         return mrp;
@@ -128,7 +128,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product [productId=" + productId + ", productName=" + productName + ", category=" + category
-                + ", description=" + description + ", brand=" + brand + ", color=" + color + ", size=" + size + ", mrp="
+                + ", description=" + description + ", brand=" + brand + ", color=" + color + ", productSize=" + productSize + ", mrp="
                 + mrp + ", discount=" + discount + ", priceAfterDiscount=" + priceAfterDiscount 
                 + ", estimatedDelivery=" + estimatedDelivery + "]";
     }

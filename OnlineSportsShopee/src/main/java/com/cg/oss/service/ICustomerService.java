@@ -3,6 +3,7 @@ package com.cg.oss.service;
 import java.util.List;
 
 import com.cg.oss.bean.Customer;
+import com.cg.oss.serviceexception.ICustomerServiceException;
 
 public interface ICustomerService {
 public Customer addCustomer(Customer customer);

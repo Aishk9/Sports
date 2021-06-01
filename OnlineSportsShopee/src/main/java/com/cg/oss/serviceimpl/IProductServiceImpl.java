@@ -1,4 +1,5 @@
-package com.cg.oss.service;
+package com.cg.oss.serviceimpl;
+
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.Product;
 import com.cg.oss.dao.IProductRepository;
+import com.cg.oss.service.IProductService;
+import com.cg.oss.serviceexception.IProductServiceException;
 
  
 
@@ -74,7 +77,7 @@ public class IProductServiceImpl implements IProductService{
     }
     @Override
     public List<Product> getProductsBySize(String size) throws IProductServiceException{
-        List<Product> product = product_Repo.findBySizevar(size);
+        List<Product> product = product_Repo.findByProductSize(size);
         if(product.isEmpty()) {
             throw new IProductServiceException("No Exception");
         }
