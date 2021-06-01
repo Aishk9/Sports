@@ -26,14 +26,14 @@ private LocalDate dob;
 @JoinColumn(name="address1")
 private Address address;
 
- public Customer(String userId, String name, String email, String contactNo, LocalDate dob, Address address) {
+ public Customer(String userId, String name, String email, String contactNo, LocalDate dob) {
 super();
 this.userId = userId;
 this.name = name;
 this.email = email;
 this.contactNo = contactNo;
 this.dob = dob;
-this.address = address;
+
 }
 public Customer() {
 super();

@@ -33,10 +33,10 @@ public class IOrderServiceImpl implements IOrderService {
     }
     
     @Override
-    public Order removeOrder(long id) {
+    public Order removeOrder(long id) throws IOrderServiceException{
          Optional<Order> order = orderRepository.findById(id);
             if(!order.isPresent()) {
-                return null;
+                throw new IOrderServiceException("Order not found") ;
             }
            orderRepository.delete(order.get());
            return order.get();
@@ -45,15 +45,11 @@ public class IOrderServiceImpl implements IOrderService {
  
 
     @Override
-    public Order updateOrder(long id, Order order) {
+    public Order updateOrder(long id, Order order) throws IOrderServiceException{
         Optional<Order> orders = orderRepository.findById(id);
         if(!orders.isPresent()) {
-            return null;
+            throw new IOrderServiceException("Order not found") ;
         }
-        orders.get().setAmount(order.getAmount());
-        //orders.get().setBillingDate(order.getBillingDate());
-        //orders.get().setCustomer(order.getCustomer());
-        //orders.get().setPaymentMethod(order.getPaymentMethod());
         return orderRepository.save(orders.get());
     }
 

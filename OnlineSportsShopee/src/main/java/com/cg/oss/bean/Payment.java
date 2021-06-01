@@ -35,12 +35,12 @@ public class Payment {
 				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
-	public Payment(long paymentId, String type, String status, Card card) {
+	public Payment(long paymentId, String type, String status) {
 		super();
 		this.paymentId = paymentId;
 		this.type = type;
 		this.status = status; 
-		this.card = card;
+		
 	}
 	
 	public long getPaymentId() {

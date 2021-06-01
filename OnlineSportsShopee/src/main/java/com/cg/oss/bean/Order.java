@@ -35,12 +35,11 @@ public class Order {
         super();
     }
     
-    public Order(long orderId, double amount, LocalDate billingDate, Customer customer, String paymentMethod) {
+    public Order(long orderId, double amount, LocalDate billingDate, String paymentMethod) {
         super();
         this.orderId = orderId;
         this.amount = amount;
         this.billingDate = billingDate;
-        this.customer = customer;
         this.paymentMethod = paymentMethod;
     }
 

@@ -19,6 +19,26 @@ import com.cg.oss.service.IProductService;
 import com.cg.oss.serviceexception.IProductServiceException;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+ 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+ 
+
+import com.cg.oss.bean.Product;
+import com.cg.oss.exception.ResourceNotFoundException;
+import com.cg.oss.service.IProductService;
+
+
  
 
 @RestController
@@ -52,6 +72,9 @@ public class IProductController {
             if (product == null) {
                 throw new ResourceNotFoundException("Not Found");
             }
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+               LocalDate now = LocalDate.now(); 
+               product.setEstimatedDelivery(now.plusDays(5));
             return product;
         } catch (IProductServiceException e) {
             throw new IProductServiceException("No Products Found");
@@ -154,3 +177,4 @@ public class IProductController {
  
 
 }
+ 
