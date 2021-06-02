@@ -14,7 +14,7 @@ import com.cg.oss.dao.ILoginRepository;
 
 
 @SpringBootTest
-class LoginServiceTest {
+class LoginLogoutRegisterServiceTest {
 
 
     @Autowired

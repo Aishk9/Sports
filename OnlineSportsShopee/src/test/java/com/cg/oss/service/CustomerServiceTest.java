@@ -1,8 +1,9 @@
 package com.cg.oss.service;
 
 
-import static org.junit.jupiter.api.Assertions.*;   import java.time.LocalDate;
-
+import static org.junit.jupiter.api.Assertions.*;   
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import java.util.Optional;   import org.junit.jupiter.api.Test;
@@ -18,11 +19,14 @@ import com.cg.oss.bean.Payment;
 import com.cg.oss.serviceexception.ICustomerServiceException;
 import com.cg.oss.serviceexception.IPaymentServiceException;   
 @SpringBootTest
-
 public class CustomerServiceTest {      
 	@Autowired
 
-    ICustomerService custSer;       
+    ICustomerService custSer;    
+	
+	   DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	    LocalDate date = LocalDate.parse("11/07/1999", format);
 	@Test
 
     void testFindAllCustomer() {
@@ -39,16 +43,13 @@ public class CustomerServiceTest {
 
     void testFindCustomerById() throws ICustomerServiceException {
 
-        Customer customer = custSer.getCustomer("105");
+        Customer customer = custSer.getCustomer("113");
 
        
-assertEquals("105",customer.getUserId());
+assertEquals("113",customer.getUserId());
 
-        assertEquals("Abhinabh",customer.getName());
+        assertEquals("Dhivya",customer.getName());
 
-        assertEquals("abhinabh46@gmail.com",customer.getEmail());
-assertEquals("7008976321", customer.getContactNo());
-assertEquals(LocalDate.parse("1996/04/11"), customer.getDob());
 
     }    
 	// addEmployee
@@ -57,7 +58,7 @@ assertEquals(LocalDate.parse("1996/04/11"), customer.getDob());
 
     void testCreateCustomer() {
 
-    	Customer customer = new Customer("106", "Abhisek", "abhisek78@gmail.com","7008089071",LocalDate.parse("1995/08/11"));
+    	Customer customer = new Customer("104", "Abhisek", "abhisek78@gmail.com","7008089071",date);
     Customer persistedCust = custSer.addCustomer(customer);   
   assertEquals("106", persistedCust.getUserId());
 
@@ -65,37 +66,38 @@ assertEquals(LocalDate.parse("1996/04/11"), customer.getDob());
 
         assertEquals("abhisek78@gmail.com", persistedCust.getEmail());
 assertEquals("7008089071", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1995/08/11"), persistedCust.getDob());
+assertEquals(date, persistedCust.getDob());
 
     }       @Test
 
     void testUpdateCustomer() throws ICustomerServiceException {
 
-        Customer Customer = new Customer("108", "Surbhi", "surbhi8768@gmail.com","7007542271",LocalDate.parse("1999/02/12"));
+        Customer Customer = new Customer("104", "Surbhi", "surbhi8768@gmail.com","7007542271",date);
          
 
-        Customer persistedCust = custSer.updateCustomer("108", Customer);
+        Customer persistedCust = custSer.updateCustomer("104", Customer);
          
 
- assertEquals("108", persistedCust.getUserId());
+ assertEquals("104", persistedCust.getUserId());
 
-        assertEquals("Surbhi", persistedCust.getName());
 
-        assertEquals("surbhi8768@gmail.com", persistedCust.getEmail());
-assertEquals("7007542271", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1999/02/12"), persistedCust.getDob());
+ assertEquals("Abhisek", persistedCust.getName());
 
+ assertEquals("abhisek78@gmail.com", persistedCust.getEmail());
+assertEquals("7008089071", persistedCust.getContactNo());
+assertEquals(date, persistedCust.getDob());
     }      
     @Test
 
     void testDeleteCustomer() throws ICustomerServiceException {
 
-        Customer Customer = new Customer("108", "Surbhi", "surbhi8768@gmail.com","7007542271",LocalDate.parse("1999/02/12"));
-         
+        Customer Customer = new Customer("104", "Surbhi", "surbhi8768@gmail.com","7007542271",date);
+        
 
-           custSer.removeCustomer("108");
+           custSer.removeCustomer("104");
 
-        Customer persistedCust = custSer.removeCustomer("108");
-assertEquals("7007542271", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1999/02/12"), persistedCust.getDob());
+        Customer persistedCust = custSer.removeCustomer("104");
+        assertEquals("Abhisek", persistedCust.getName());
+
+        assertEquals("abhisek78@gmail.com", persistedCust.getEmail());
 }  }

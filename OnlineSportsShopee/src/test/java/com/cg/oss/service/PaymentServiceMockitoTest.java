@@ -67,7 +67,7 @@ class PaymentServiceMockitoTest {
 
     @Test
     void testCreatePayment() {
-        Payment payment = new Payment(112, "CreditCard", "Pending");
+        Payment payment = new Payment(113, "DebitCard", "Pending");
         
         Mockito.when(payRepo.save(payment)).thenReturn(payment);
         
@@ -75,14 +75,14 @@ class PaymentServiceMockitoTest {
         
        
         
-        assertEquals(112, persistedPay.getPaymentId());
-        assertEquals("CreditCard", persistedPay.getType());
+        assertEquals(113, persistedPay.getPaymentId());
+        assertEquals("DebitCard", persistedPay.getType());
         assertEquals("Pending", persistedPay.getStatus());
     }
     
     @Test
     void testPaymentById() throws IPaymentServiceException {
-        Payment Payment = new Payment(113, "DebitCard", "Complete");
+        Payment Payment = new Payment(113, "DebitCard", "Pending");
         
         Mockito.when(payRepo.findById((long)113)).thenReturn(Optional.of(Payment));
         
@@ -90,14 +90,14 @@ class PaymentServiceMockitoTest {
         
         assertEquals(113, persistedPay.getPaymentId());
         assertEquals("DebitCard", persistedPay.getType());
-        assertEquals("Complete", persistedPay.getStatus());
+        assertEquals("Pending", persistedPay.getStatus());
     }
     
     @Test
     void testAllPayments() {
         Payment Payment1 = new Payment(111, "DebitCard", "Pending");
         Payment Payment2 = new Payment(112, "CreditCard", "Pending");
-        Payment Payment3 = new Payment(113, "DebitCard", "Complete");
+        Payment Payment3 = new Payment(113, "DebitCard", "Pending");
         
         List<Payment> PaymentList = new ArrayList<>();
         PaymentList.add(Payment1);
@@ -114,7 +114,7 @@ class PaymentServiceMockitoTest {
     
     @Test
     void testUpdatePayment() {
-        Payment Payment = new Payment(113, "DebitCard", "Pending");
+        Payment Payment = new Payment(113, "DebitCard", "Complete");
         
         Mockito.when(payRepo.findById((long)113)).thenReturn(Optional.of(Payment));
         Mockito.when(payRepo.save(Payment)).thenReturn(Payment);
@@ -123,20 +123,20 @@ class PaymentServiceMockitoTest {
         
         assertEquals(113, persistedPay.getPaymentId());
         assertEquals("DebitCard", persistedPay.getType());
-        assertEquals("Pending", persistedPay.getStatus());
+        assertEquals("Complete", persistedPay.getStatus());
     }
     
     @Test
     void testDeletePayment() throws IPaymentServiceException {
-        Payment Payment = new Payment(111, "DebitCard", "Pending");
+        Payment Payment = new Payment(113, "DebitCard", "Complete");
         
-        Mockito.when(payRepo.findById((long)111)).thenReturn(Optional.of(Payment));
-        payRepo.deleteById((long)111);
-        Payment persistedPay = payService.deletePayment(111);
+        Mockito.when(payRepo.findById((long)113)).thenReturn(Optional.of(Payment));
+        payRepo.deleteById((long)113);
+        Payment persistedPay = payService.deletePayment(113);
         
-        assertEquals(111, persistedPay.getPaymentId());
+        assertEquals(113, persistedPay.getPaymentId());
         assertEquals("DebitCard", persistedPay.getType());
-        assertEquals("Pending", persistedPay.getStatus());
+        assertEquals("Complete", persistedPay.getStatus());
     }
     
 

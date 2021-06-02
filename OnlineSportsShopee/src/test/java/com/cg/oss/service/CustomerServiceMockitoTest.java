@@ -3,6 +3,7 @@ package com.cg.oss.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,11 @@ ICustomerServiceImpl custSer;
 // @MockBean - injecting external services
 @MockBean
 ICustomerRepository custRepo;
+
+DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+LocalDate date = LocalDate.parse("11/07/1999", format);
+
 // Initialization of mock objects
 @BeforeEach
 void init() {
@@ -40,7 +46,7 @@ MockitoAnnotations.openMocks(this);
 }
 @Test
 void testCreateCustomer() {
-Customer customer = new Customer("101", "Sriya", "sriya29@gmail.com","8736547891",LocalDate.parse("1999/03/08"));
+Customer customer = new Customer("101", "Sriya", "sriya29@gmail.com","8736547891",date);
 
  Mockito.when(custRepo.save(customer)).thenReturn(customer);
 
@@ -51,13 +57,13 @@ assertEquals("101", persistedCust.getUserId());
 
         assertEquals("sriya29@gmail.com", persistedCust.getEmail());
 assertEquals("8736547891", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1999/03/08"), persistedCust.getDob());
+assertEquals(date, persistedCust.getDob());
 
 }
 
  @Test
 void testCustomerById() throws ICustomerServiceException {
-Customer customer = new Customer("102", "Shilpa", "shilpaa789@gmail.com","6789965262",LocalDate.parse("1997/09/07"));
+Customer customer = new Customer("102", "Shilpa", "shilpaa789@gmail.com","6789965262",date);
 
  Mockito.when(custRepo.findById("102")).thenReturn(Optional.of(customer));
 
@@ -67,19 +73,19 @@ Customer customer = new Customer("102", "Shilpa", "shilpaa789@gmail.com","678996
 
         assertEquals("Shilpa", persistedCust.getName());
 
-        assertEquals("shilpa789@gmail.com", persistedCust.getEmail());
+        assertEquals("shilpaa789@gmail.com", persistedCust.getEmail());
 assertEquals("6789965262", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1997/09/07"), persistedCust.getDob());
+assertEquals(date, persistedCust.getDob());
 
 }
 
  @Test
 void testAllCustomer() {
-Customer customer1 = new Customer("102", "Shilpa", "shilpaa789@gmail.com","6789965262",LocalDate.parse("1997/09/07"));
+Customer customer1 = new Customer("102", "Shilpa", "shilpaa789@gmail.com","6789965262",date);
 
- Customer customer2 = new Customer("101", "Sriya", "sriya29@gmail.com","8736547891",LocalDate.parse("1999/03/08"));
+ Customer customer2 = new Customer("101", "Sriya", "sriya29@gmail.com","8736547891",date);
 
-Customer customer3 = new Customer("103", "Ragini", "raginidas@gmail.com","8988776544",LocalDate.parse("1996/02/10"));
+Customer customer3 = new Customer("103", "Ragini", "raginidas@gmail.com","8988776544",date);
 
 List<Customer> customerList = new ArrayList<>();
 customerList.add(customer1);
@@ -96,7 +102,7 @@ customerList.add(customer3);
 
  @Test
 void testUpdateCustomer() throws ICustomerServiceException {
-Customer customer = new Customer("105", "Abhinabh", "abhinabh46@gmail.com","7008976321",LocalDate.parse("1996/04/11"));
+Customer customer = new Customer("105", "Abhinabh", "abhinabh46@gmail.com","7008976321",date);
 
 Mockito.when(custRepo.findById("105")).thenReturn(Optional.of(customer));
 Mockito.when(custRepo.save(customer)).thenReturn(customer);
@@ -109,13 +115,13 @@ Mockito.when(custRepo.save(customer)).thenReturn(customer);
 
         assertEquals("abhinabh46@gmail.com", persistedCust.getEmail());
 assertEquals("7008976321", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1996/04/11"), persistedCust.getDob());
+assertEquals(date, persistedCust.getDob());
 
 }
 
  @Test
 void testDeleteCustomer() throws ICustomerServiceException {
-Customer customer = new Customer("105", "Abhinabh", "abhinabh46@gmail.com","7008976321",LocalDate.parse("1996/04/11"));
+Customer customer = new Customer("105", "Abhinabh", "abhinabh46@gmail.com","7008976321",date);
 
 Mockito.when(custRepo.findById("105")).thenReturn(Optional.of(customer));
 custRepo.deleteById("105");
@@ -127,7 +133,7 @@ Customer persistedCust = custSer.removeCustomer("105");
 
         assertEquals("abhinabh46@gmail.com", persistedCust.getEmail());
 assertEquals("7008976321", persistedCust.getContactNo());
-assertEquals(LocalDate.parse("1996/04/11"), persistedCust.getDob());
+assertEquals(date, persistedCust.getDob());
 
 }
 }

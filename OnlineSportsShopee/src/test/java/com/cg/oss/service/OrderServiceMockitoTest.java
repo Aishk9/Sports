@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +58,9 @@ class OrderServiceMockitoTest {
     IOrderRepository orderRepository;
 
  
+    DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    LocalDate date = LocalDate.parse("11/07/1999", format);
 
     // Initialization of mock objects
     @BeforeEach
@@ -69,7 +72,7 @@ class OrderServiceMockitoTest {
 
     @Test
     void testCreateOrder() {
-        Order order = new Order(111, 1000.0,LocalDate.parse("2020/05/06"), "Credit card");
+        Order order = new Order(111, 1000.0,date, "Credit card");
 
  
 
@@ -79,29 +82,25 @@ class OrderServiceMockitoTest {
         
         assertEquals(111, persistedOrder.getOrderId());
         assertEquals(1000.0, persistedOrder.getAmount());
-        assertEquals(LocalDate.parse("2020/05/06"), persistedOrder.getBillingDate());
-        assertEquals("Smith", persistedOrder.getCustomer());
-        assertEquals("Credit card", persistedOrder.getPaymentMethod());
+        assertEquals(date, persistedOrder.getBillingDate());
     }
     @Test
     void testOrderById() throws IOrderServiceException {
-        Order order = new Order(112, 2000.0,LocalDate.parse("2020/06/01"), "Credit card");
+        Order order = new Order(112, 2000.0,date, "Credit card");
         Mockito.when(orderRepository.findById((long) 112)).thenReturn(Optional.of(order));
         
         Order persistedOrder = orderService.getOrderDetails(112);
         
         assertEquals(111, persistedOrder.getOrderId());
         assertEquals(1000.0, persistedOrder.getAmount());
-        assertEquals(LocalDate.parse("2020/05/06"), persistedOrder.getBillingDate());
-        assertEquals("Smith", persistedOrder.getCustomer());
-        assertEquals("Credit card", persistedOrder.getPaymentMethod());
+        assertEquals(date, persistedOrder.getBillingDate());
     }
     
     @Test
     void testAllOrder() {
-        Order order1 = new Order(111, 1000.0,LocalDate.parse("2020/05/06"),"Credit card");
-         Order order2 = new Order(112, 2000.0,LocalDate.parse("2020/06/01"),"Credit card");
-        Order order3 = new Order(113, 3000.0,LocalDate.parse("2020/04/02"),"Debit card");
+        Order order1 = new Order(111, 1000.0,date,"Credit card");
+         Order order2 = new Order(112, 2000.0,date,"Credit card");
+        Order order3 = new Order(113, 3000.0,date,"Debit card");
         List<Order> orderList = new ArrayList<>();
         orderList.add(order1);
         orderList.add(order2);
@@ -118,7 +117,7 @@ class OrderServiceMockitoTest {
 
     @Test
     void testUpdateOrder() throws IOrderServiceException {
-        Order order = new Order(113, 3000.0,LocalDate.parse("2020/04/02"), "Debit card");
+        Order order = new Order(113, 3000.0,date, "Debit card");
         Mockito.when(orderRepository.findById((long) 113)).thenReturn(Optional.of(order));
         Mockito.when(orderRepository.save(order)).thenReturn(order);
         
@@ -126,22 +125,18 @@ class OrderServiceMockitoTest {
         
         assertEquals(113, persistedOrder.getOrderId());
         assertEquals(3000.0, persistedOrder.getAmount());
-        assertEquals(LocalDate.parse("2020/04/02"), persistedOrder.getBillingDate());
-        assertEquals("Smith", persistedOrder.getCustomer());
-        assertEquals("Debit card", persistedOrder.getPaymentMethod());
+        assertEquals(date, persistedOrder.getBillingDate());
     }
     @Test
     void testDeleteOrder() throws IOrderServiceException
     {
-        Order order = new Order(113, 3000.0,LocalDate.parse("2020/04/02"), "Debit card");
+        Order order = new Order(113, 3000.0,date, "Debit card");
         Mockito.when(orderRepository.findById((long)113)).thenReturn(Optional.of(order));
         orderRepository.deleteById((long) 113);
         Order persistedOrder = orderService.removeOrder(113);
         
         assertEquals(113, persistedOrder.getOrderId());
         assertEquals(3000.0, persistedOrder.getAmount());
-        assertEquals(LocalDate.parse("2020/04/02"), persistedOrder.getBillingDate());
-        assertEquals("Smith", persistedOrder.getCustomer());
-        assertEquals("Debit card", persistedOrder.getPaymentMethod());
+        assertEquals(date, persistedOrder.getBillingDate());
     }
 }

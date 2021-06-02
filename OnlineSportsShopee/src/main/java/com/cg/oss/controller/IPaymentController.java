@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.oss.bean.Payment;
+import com.cg.oss.bean.Product;
 import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.IPaymentService;
 import com.cg.oss.serviceexception.IPaymentServiceException;
+
 
 
 @RestController
@@ -49,14 +51,16 @@ public class IPaymentController {
 	}
 	
 	@RequestMapping(value= "/payment/update/{paymentId}", method= RequestMethod.PUT)
-    public Payment updatePayment(@RequestBody Payment updpay, @PathVariable long paymentId) throws ResourceNotFoundException,IPaymentServiceException{
+	public Payment updatePayment(@PathVariable("paymentId")  long paymentId, @RequestBody Payment payment) throws ResourceNotFoundException,IPaymentServiceException {
         
+	//	
+		
 		try {
-			Payment payment = payService.getPaymentDetails(paymentId);
-			if(payment==null) {
+			Payment payment1 = payService.updatePayment(paymentId, payment);
+			if(payment1==null) {
 				throw new ResourceNotFoundException("Not Found");
 			}
-			return payment;
+			return payment1;
 		}catch(IPaymentServiceException e) {
 			throw new IPaymentServiceException("No Payment Found");
 		}
@@ -66,10 +70,10 @@ public class IPaymentController {
 	
 	
 	@RequestMapping(value= "/payment/delete/{paymentId}", method= RequestMethod.DELETE)
-	public Payment deletePayment(@PathVariable long paymentId) throws ResourceNotFoundException,IPaymentServiceException {
+	public Payment deletePayment(@PathVariable("paymentId") long paymentId) throws ResourceNotFoundException,IPaymentServiceException {
 
 		try {
-			Payment payment = payService.getPaymentDetails(paymentId);
+			Payment payment = payService.deletePayment(paymentId);
 			if(payment==null) {
 				throw new ResourceNotFoundException("Not Found");
 			}

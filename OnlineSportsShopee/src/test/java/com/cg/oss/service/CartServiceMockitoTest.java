@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +62,11 @@ public class CartServiceMockitoTest {
 
     @Test
     void testCreateCart() {
-      Cart cart = new Cart(101,"ball","ball",2,10000,20000);
+      Cart cart = new Cart(11,"ball","ball",2,10000,20000);
         
-        Cart persistedCart = cartRepo.save(cart);
+        Cart persistedCart = cartService.addCart(cart);
         
-        assertEquals(101, persistedCart.getCartId());
+        assertEquals(11, persistedCart.getCartId());
         assertEquals("ball", persistedCart.getImageName());
         assertEquals("ball", persistedCart.getProductName());
         assertEquals(2, persistedCart.getQuantity());
@@ -137,7 +138,7 @@ public class CartServiceMockitoTest {
  
 
 
-        Cart persistedCart = cartService.updateCart(112, cart);
+        Cart persistedCart = cartService.updateCart(111, cart);
 
  
 

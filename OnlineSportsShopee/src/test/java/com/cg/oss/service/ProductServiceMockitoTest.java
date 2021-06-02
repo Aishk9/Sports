@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,9 @@ import com.cg.oss.serviceimpl.IProductServiceImpl;
 @ExtendWith(SpringExtension.class)
 public class ProductServiceMockitoTest {
 
- 
+	DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	LocalDate date = LocalDate.parse("11/07/1999", format);
 
     @InjectMocks
     IProductServiceImpl productService;
@@ -59,8 +62,8 @@ public class ProductServiceMockitoTest {
 
     @Test
     void testCreateProduct() {
-        Product product = new Product(111, "ball", "cricket", "ball", "lava", "red", "XL", 30000, 20, 25000,
-                LocalDate.parse("2020/09/11"));
+        Product product = new Product(11, "ball", "cricket", "ball", "lava", "red", "XL", 30000, 20, 25000,
+               date);
 
  
 
@@ -68,7 +71,7 @@ public class ProductServiceMockitoTest {
 
  
 
-        assertEquals(111, persistedProduct.getProductId());
+        assertEquals(11, persistedProduct.getProductId());
         assertEquals("ball", persistedProduct.getProductName());
         assertEquals("cricket", persistedProduct.getCategory());
         assertEquals("lava", persistedProduct.getBrand());
@@ -77,7 +80,7 @@ public class ProductServiceMockitoTest {
         assertEquals(30000, persistedProduct.getMrp());
         assertEquals(20, persistedProduct.getDiscount());
         assertEquals(25000, persistedProduct.getPriceAfterDiscount());
-        assertEquals(LocalDate.parse("2020/09/11"), persistedProduct.getEstimatedDelivery());
+        assertEquals(date, persistedProduct.getEstimatedDelivery());
     }
 
  
@@ -85,7 +88,7 @@ public class ProductServiceMockitoTest {
     @Test
     void testProductById() throws IProductServiceException {
         Product product = new Product(113, "ball", "cricket", "ball", "lava", "red", "XL", 30000, 20, 25000,
-                LocalDate.parse("2020/09/11"));
+               date);
 
  
 
@@ -103,7 +106,7 @@ public class ProductServiceMockitoTest {
         assertEquals(30000, persistedProduct.getMrp());
         assertEquals(20, persistedProduct.getDiscount());
         assertEquals(25000, persistedProduct.getPriceAfterDiscount());
-        assertEquals(LocalDate.parse("2020/09/11"), persistedProduct.getEstimatedDelivery());
+        assertEquals(date, persistedProduct.getEstimatedDelivery());
 
  
 
@@ -114,11 +117,11 @@ public class ProductServiceMockitoTest {
     @Test
     void testAllCart() {
         Product product1 = new Product(111, "ball", "cricket", "ball", "lava", "red", "XL", 30000, 25, 25000,
-                LocalDate.parse("2020/09/11"));
+               date);
         Product product2 = new Product(112, "bat", "cricket", "bat", "lava", "white", "L", 10000, 25, 5000,
-                LocalDate.parse("2020/09/11"));
+               date);
         Product product3 = new Product(113, "bat", "cricket", "bat", "lava", "yello", "M", 20000, 25, 15000,
-                LocalDate.parse("2020/09/11"));
+               date);
 
  
 
@@ -148,7 +151,7 @@ public class ProductServiceMockitoTest {
     @Test
     void testUpdateCart() throws IProductServiceException {
         Product product = new Product(112, "ball", "cricket", "ball", "lava", "red", "XL", 30000, 25, 25000,
-                LocalDate.parse("2020/09/11"));
+               date);
 
  
 
@@ -170,7 +173,7 @@ public class ProductServiceMockitoTest {
         assertEquals(30000, persistedProduct.getMrp());
         assertEquals(20, persistedProduct.getDiscount());
         assertEquals(25000, persistedProduct.getPriceAfterDiscount());
-        assertEquals(LocalDate.parse("2020/09/11"), persistedProduct.getEstimatedDelivery());
+        assertEquals(date, persistedProduct.getEstimatedDelivery());
 
  
 
@@ -180,7 +183,7 @@ public class ProductServiceMockitoTest {
 
     @Test
         void testDeleteCart() throws IProductServiceException {
-            Product product = new Product(112,"ball","cricket","ball","lava","red","XL", 30000, 25, 25000, LocalDate.parse("2020/09/11"));
+            Product product = new Product(112,"ball","cricket","ball","lava","red","XL", 30000, 25, 25000,date);
             
             Mockito.when(productRepo.findById((long)112)).thenReturn(Optional.of(product));
             productRepo.deleteById((long)112);
@@ -194,7 +197,7 @@ public class ProductServiceMockitoTest {
             assertEquals(30000, persistedProduct.getMrp());
             assertEquals(20, persistedProduct.getDiscount());
             assertEquals(25000, persistedProduct.getPriceAfterDiscount());
-            assertEquals(LocalDate.parse("2020/09/11"), persistedProduct.getEstimatedDelivery());
+            assertEquals(date, persistedProduct.getEstimatedDelivery());
             
         }
 

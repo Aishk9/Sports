@@ -37,7 +37,7 @@ public class PaymentServiceTest {
     @Test
     void testFindAllPayment() {
         List<Payment> Payments = payService.getAllPaymentDetails();
-        assertEquals(3, Payments.size());
+        assertEquals(2, Payments.size());
     }
     // findPaymentById
 
@@ -45,19 +45,37 @@ public class PaymentServiceTest {
 
     @Test
     void testFindPaymentById() throws IPaymentServiceException {
-        Payment Payment = payService.getPaymentDetails(112);
-        assertEquals("CreditCard", Payment.getType());
-        assertEquals("Pending", Payment.getStatus());
+        Payment Payment = payService.getPaymentDetails(111);
+        assertEquals("DebitCard", Payment.getType());
     }
 
     // addEmployee
     @Test
     void testCreatePayment() {
-        Payment Payment = new Payment(114,"CreditCard","Complete");
+        Payment Payment = new Payment(114,"CreditCard","Pending");
 
  
 
         Payment persistedPay = payService.addPayment(Payment);
+
+ 
+
+        assertEquals(114, persistedPay.getPaymentId());
+        assertEquals("CreditCard", persistedPay.getType());
+        assertEquals("Pending", persistedPay.getStatus());
+        
+    }
+
+ 
+
+    @Test
+    void testUpdatePayment() throws IPaymentServiceException {
+        Payment Payment = new Payment(114,"CreditCard","Complete");
+
+ 
+
+
+        Payment persistedPay = payService.updatePayment(114, Payment);
 
  
 
@@ -70,36 +88,16 @@ public class PaymentServiceTest {
  
 
     @Test
-    void testUpdatePayment() throws IPaymentServiceException {
-        Payment Payment = new Payment(114,"DebitCard","Complete");
-
- 
-
-
-        Payment persistedPay = payService.updatePayment(114, Payment);
-
- 
-
-        assertEquals(114, persistedPay.getPaymentId());
-        assertEquals("DebitCard", persistedPay.getType());
-        assertEquals("Complete", persistedPay.getStatus());
-        
-    }
-
- 
-
-    @Test
     void testDeletePayment() throws IPaymentServiceException {
-        Payment Payment = new Payment(114,"DebitCard","Complete");
+        Payment Payment = new Payment(114,"CreditCard","Complete");
 
  
 
         payService.deletePayment(114);
-        Payment persistedPay = payService.deletePayment(114);
-        assertEquals(114, persistedPay.getPaymentId());
-        assertEquals("DebitCard", persistedPay.getType());
+        Payment persistedPay = payService.deletePayment(111);
+        assertEquals(111, persistedPay.getPaymentId());
+        assertEquals("CreditCard", persistedPay.getType());
         assertEquals("Complete", persistedPay.getStatus());
-
     }
 
  
