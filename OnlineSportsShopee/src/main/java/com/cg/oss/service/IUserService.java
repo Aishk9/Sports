@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
  
 
 import com.cg.oss.bean.User;
-import com.cg.oss.serviceexception.IUserServiceException;
+import com.cg.oss.exception.ResourceNotFoundException;
+
 
  
 
 @Service
 public interface IUserService {
-    public User findUserByUserId(String userid) throws IUserServiceException ;
+    public User findUserByUserId(String userid) throws ResourceNotFoundException ;
 
  
 
@@ -27,11 +28,11 @@ public interface IUserService {
 
  
 
-    public User changeUserPassword(User user) throws IUserServiceException;
+    public User changeUserPassword(User user) throws ResourceNotFoundException;
 
  
 
-    public User deleteUserByUserId(String userid) throws IUserServiceException;
+    public User deleteUserByUserId(String userid) throws ResourceNotFoundException;
 
  
 

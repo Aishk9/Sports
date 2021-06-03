@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.oss.bean.Status;
 import com.cg.oss.bean.User;
+import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.IUserService;
-import com.cg.oss.serviceexception.IUserServiceException;
+
 
 
  
@@ -37,7 +38,7 @@ public class IUserController {
 //READ
     
     @GetMapping("/user/userid/{userid}")
-    public User findUserByUserId(@PathVariable String userid) throws IUserServiceException{
+    public User findUserByUserId(@PathVariable String userid) throws ResourceNotFoundException{
         if (regservice.findUserByUserId(userid) == null) {
             return null;
         }
@@ -66,13 +67,13 @@ public class IUserController {
 //UPDATE
     
     @PutMapping("/user/{userid}/update")
-    public User changeUserPassword(@Valid @RequestBody User user) throws IUserServiceException{
+    public User changeUserPassword(@Valid @RequestBody User user) throws ResourceNotFoundException{
         return regservice.changeUserPassword(user);
     }
 //DELETE
     
     @DeleteMapping("/user/{userid}")
-    public User deleteUserByUserId(@PathVariable String userid) throws IUserServiceException{
+    public User deleteUserByUserId(@PathVariable String userid) throws ResourceNotFoundException{
         if(regservice.findUserByUserId(userid)==null){
           return null;
         }

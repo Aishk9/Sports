@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cg.oss.bean.Cart;
 import com.cg.oss.bean.Product;
 import com.cg.oss.dao.ICartRepository;
+import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.ICartService;
-import com.cg.oss.serviceexception.ICartServiceException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +43,10 @@ public class ICartServiceImpl implements ICartService {
  
 
     @Override
-    public Cart deleteCart(long cartId) throws ICartServiceException {
+    public Cart deleteCart(long cartId) throws ResourceNotFoundException {
         Optional<Cart> cart = cartRepo.findById(cartId);
         if (!cart.isPresent()) {
-            throw new ICartServiceException("No Cart Details Found For Deletion");
+            throw new ResourceNotFoundException("No Cart Details Found For Deletion");
         }
         cartRepo.delete(cart.get());
         return cart.get();
@@ -54,11 +55,11 @@ public class ICartServiceImpl implements ICartService {
  
 
     @Override
-    public Cart updateCart(long cartId, Cart cart) throws ICartServiceException {
+    public Cart updateCart(long cartId, Cart cart) throws ResourceNotFoundException {
         
           Optional<Cart> cart1 =  cartRepo.findById(cartId);
             if (!cart1.isPresent()) {
-                throw new ICartServiceException("No Exception");
+                throw new ResourceNotFoundException("No Exception");
             }
             else  {
                          cart.setCartId(cartId);
@@ -69,10 +70,10 @@ public class ICartServiceImpl implements ICartService {
  
 
     @Override
-    public Cart getCartDetails(long cartId) throws ICartServiceException {
+    public Cart getCartDetails(long cartId) throws ResourceNotFoundException {
         Optional<Cart> cart = cartRepo.findById(cartId);
         if (!cart.isPresent()) {
-            throw new ICartServiceException("No Cart Details Found For View Cart");
+            throw new ResourceNotFoundException("No Cart Details Found For View Cart");
         }
         return cart.get();
 

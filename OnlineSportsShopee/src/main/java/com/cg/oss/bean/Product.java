@@ -2,12 +2,19 @@ package com.cg.oss.bean;
 
 import java.time.LocalDate;
 
+ 
+
+ 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+ 
 
 import org.springframework.stereotype.Component;
 
@@ -15,13 +22,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="ProductNew")
+@Table(name = "productTable")
 public class Product {
     @Id
     private long productId;
+    @NotEmpty(message = "Project name is required")
     private String productName;
     private String category;
     private String description;
+    @NotEmpty(message = "Brand is required")
     private String brand; 
     private String color;
     private String productSize;
@@ -37,7 +46,7 @@ public class Product {
         
     }
     public Product(long productId, String productName, String category, String description, String brand, String color,
-            String productSize, double mrp, int discount, double priceAfterDiscount,
+            String productSize, double mrp, int discount, double priceAfterDiscount,boolean inStock,
             LocalDate estimatedDelivery) {
         super();
         this.productId = productId;
@@ -50,7 +59,7 @@ public class Product {
         this.mrp = mrp;
         this.discount = discount;
         this.priceAfterDiscount = priceAfterDiscount;
-        //this.inStock = inStock;
+        this.inStock = inStock;
         this.estimatedDelivery = estimatedDelivery;
     }
     public long getProductId() {
@@ -89,10 +98,10 @@ public class Product {
     public void setColor(String color) {
         this.color = color;
     }
-    public String getproductSize() {
+    public String getProductSize() {
         return productSize;
     }
-    public void setproductSize(String productSize) {
+    public void setSize_Var(String productSize) {
         this.productSize = productSize;
     }
     public double getMrp() {
@@ -128,13 +137,10 @@ public class Product {
     @Override
     public String toString() {
         return "Product [productId=" + productId + ", productName=" + productName + ", category=" + category
-                + ", description=" + description + ", brand=" + brand + ", color=" + color + ", productSize=" + productSize + ", mrp="
+                + ", description=" + description + ", brand=" + brand + ", color=" + color + ", size=" + productSize + ", mrp="
                 + mrp + ", discount=" + discount + ", priceAfterDiscount=" + priceAfterDiscount 
                 + ", estimatedDelivery=" + estimatedDelivery + "]";
     }
     
 }
-
-
-
-
+ 

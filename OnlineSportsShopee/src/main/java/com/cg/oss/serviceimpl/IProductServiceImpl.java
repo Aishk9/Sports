@@ -1,26 +1,11 @@
 package com.cg.oss.serviceimpl;
 
 
-import java.util.List;
-
-
-
-import java.util.Optional;
-
- 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
- 
-
-import com.cg.oss.bean.Product;
-import com.cg.oss.dao.IProductRepository;
-import com.cg.oss.service.IProductService;
-import com.cg.oss.serviceexception.IProductServiceException;
-
- 
 import java.time.LocalDate;
+
+ 
+
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -38,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.Product;
 import com.cg.oss.dao.IProductRepository;
+import com.cg.oss.exception.ResourceNotFoundException;
+import com.cg.oss.service.IProductService;
 
  
 
@@ -68,31 +55,29 @@ public class IProductServiceImpl implements IProductService{
         }
         return product;
     }
+    
     @Override
-    public Product getProduct(long product_id) throws IProductServiceException{
+    public Product getProduct(long product_id) throws ResourceNotFoundException {
         Optional<Product> product = product_Repo.findById(product_id);
-     
-           
-            if(!product.isPresent()) {
-                throw new IProductServiceException("No Exception");
-            }
-        
-           return product.get();
+        if(!product.isPresent()) {
+            throw new ResourceNotFoundException("Product not found") ;
+        }
+        return product.get();
     }
     @Override
-    public Product removeProduct(long id) throws IProductServiceException {
+    public Product removeProduct(long id) throws ResourceNotFoundException {
          Optional<Product> product = product_Repo.findById(id);
             if(!product.isPresent()) {
-                throw new IProductServiceException("No Exception");
+                throw new ResourceNotFoundException("Product not found");
             }
            product_Repo.delete(product.get());
            return product.get();
     }
     @Override
-    public Product updateProduct(long id, Product product) throws IProductServiceException{
+    public Product updateProduct(long id, Product product) throws ResourceNotFoundException{
           Optional<Product> prod =  product_Repo.findById(id);
             if (!prod.isPresent()) {
-                throw new IProductServiceException("No Exception");
+                throw new ResourceNotFoundException("Product not found");
             }
             else  {
                 double total = product.getMrp() - ((product.getMrp()*product.getDiscount())/100);
@@ -101,11 +86,11 @@ public class IProductServiceImpl implements IProductService{
             }
     }
     @Override
-    public List<Product> getProductsByName(String productName) throws IProductServiceException{
+    public List<Product> getProductsByName(String productName) throws ResourceNotFoundException{
         List<Product> product = product_Repo.findByProductName(productName);
         
         if(product.isEmpty()) {
-            throw new IProductServiceException("No Exception");
+            throw new ResourceNotFoundException("Product not found");
         }
         else {
             for(Product product_obj : product) {
@@ -115,10 +100,10 @@ public class IProductServiceImpl implements IProductService{
         }
     }
     @Override
-    public List<Product> getProductsBySize(String size) throws IProductServiceException{
+    public List<Product> getProductsBySize(String size) throws ResourceNotFoundException{
         List<Product> product = product_Repo.findByProductSize(size);
         if(product.isEmpty()) {
-            throw new IProductServiceException("No Exception");
+            throw new ResourceNotFoundException("Product not found");
         }
         else {
             for(Product product_obj : product) {
@@ -128,10 +113,10 @@ public class IProductServiceImpl implements IProductService{
         }
     }
     @Override
-    public List<Product> getProductsByPrice(double price) throws IProductServiceException{
+    public List<Product> getProductsByPrice(double price) throws ResourceNotFoundException{
         List<Product> product =  product_Repo.findByMrp(price);
         if(product.isEmpty()) {
-            throw new IProductServiceException("No Exception");
+            throw new ResourceNotFoundException("Product not found");
         }
         else {
             for(Product product_obj : product) {
@@ -141,10 +126,10 @@ public class IProductServiceImpl implements IProductService{
         }
     }
     @Override
-    public List<Product> getProductsByColor(String color) throws IProductServiceException{
+    public List<Product> getProductsByColor(String color) throws ResourceNotFoundException{
         List<Product> product = product_Repo.findByColor(color);
         if(product.isEmpty()) {
-            throw new IProductServiceException("No Exception");
+            throw new ResourceNotFoundException("Product not found");
         }
         else {
             for(Product product_obj : product) {

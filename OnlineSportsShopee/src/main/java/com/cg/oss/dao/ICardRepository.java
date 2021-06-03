@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.oss.bean.Card;
 
 @Repository
-public interface ICardRepository extends JpaRepository<Card, String>{
+
+public interface ICardRepository extends JpaRepository<Card, Integer>{
 	 
 }

@@ -5,18 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+ 
 
 import org.springframework.stereotype.Component;
 
  
-@Component
+
 @Entity
-@Table(name="CartNew")
 public class Cart {
      @Id
      private long cartId;
      private String imageName;
+
+ 
+
+     @NotEmpty(message = "productName is required")
      private String productName;
      private int quantity;
      private double price;

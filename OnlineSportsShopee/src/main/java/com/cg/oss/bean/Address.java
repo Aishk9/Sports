@@ -3,20 +3,26 @@ package com.cg.oss.bean;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="AddressNew")
+@Table(name="Address1")
 public class Address {
 
  @Id
 private String doorNo;
+@NotEmpty(message = "Street is required")
 private String street;
+@NotEmpty(message = "Area is required")
 private String area;
+@NotEmpty(message = "City is required")
 private String city;
+@NotEmpty(message = "State is required")
 private String state;
+@NotEmpty(message = "Pincode is required")
 private int pincode;
 
  public Address() {
@@ -73,6 +79,5 @@ public String toString() {
 return "Address [doorNo=" + doorNo + ", street=" + street + ", area=" + area + ", city=" + city + ", state="
 + state + ", pincode=" + pincode + "]";
 }
-
 
 }

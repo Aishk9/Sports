@@ -5,7 +5,8 @@ import java.util.List;
 
 
 import com.cg.oss.bean.Product;
-import com.cg.oss.serviceexception.IProductServiceException;
+import com.cg.oss.exception.ResourceNotFoundException;
+
 
  
 
@@ -17,18 +18,18 @@ public interface IProductService {
     
     public Product addProduct(Product product);
     
-    public Product getProduct(long id) throws IProductServiceException;
+    public Product getProduct(long id) throws ResourceNotFoundException;
     
-    public Product removeProduct(long id) throws IProductServiceException;
+    public Product removeProduct(long id) throws ResourceNotFoundException;
     
-    public Product updateProduct(long id, Product product) throws IProductServiceException;
+    public Product updateProduct(long id, Product product) throws ResourceNotFoundException;
     
-    public List<Product> getProductsByName(String name) throws IProductServiceException;
+    public List<Product> getProductsByName(String name) throws ResourceNotFoundException;
     
-    public List<Product> getProductsBySize(String size) throws IProductServiceException;
+    public List<Product> getProductsBySize(String size) throws ResourceNotFoundException;
     
-    public List<Product> getProductsByPrice(double price) throws IProductServiceException;
+    public List<Product> getProductsByPrice(double price) throws ResourceNotFoundException;
     
-    public List<Product> getProductsByColor(String color) throws IProductServiceException;
+    public List<Product> getProductsByColor(String color) throws ResourceNotFoundException;
 }
  

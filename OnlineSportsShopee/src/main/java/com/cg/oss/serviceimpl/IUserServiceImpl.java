@@ -9,56 +9,32 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.User;
 import com.cg.oss.dao.IUserRepository;
+import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.IUserService;
-import com.cg.oss.serviceexception.IUserServiceException;
-
- 
-
- 
 
  
 
 @Service
 public class IUserServiceImpl implements IUserService {
 
- 
-
- 
-
- 
 
     @Autowired
     IUserRepository regRepo;
 
- 
-
- 
-
- 
 
     @Override
     public User createUser(User user){
         return regRepo.save(user);
 
- 
-
- 
-
- 
 
     }
 
- 
-
- 
-
- 
 
     @Override
-    public User findUserByUserId(String userid) throws IUserServiceException {
+    public User findUserByUserId(String userid) throws ResourceNotFoundException {
         Optional<User> optional = regRepo.findById(userid);
         if (!optional.isPresent()) {
-            throw new IUserServiceException();
+            throw new ResourceNotFoundException();
         }
 
  
@@ -84,11 +60,11 @@ public class IUserServiceImpl implements IUserService {
  
 
     @Override
-    public User changeUserPassword(User user) throws IUserServiceException {
+    public User changeUserPassword(User user) throws ResourceNotFoundException {
         User dbUser = getUser(user);
         Optional<User> use = regRepo.findById(dbUser.getUsername());
         if(!use.isPresent()) {
-            throw new IUserServiceException();
+            throw new ResourceNotFoundException();
         }
         if (isNullOrEmpty(dbUser.getPassword())) {
             dbUser.setPassword(user.getPassword());
@@ -130,10 +106,10 @@ public class IUserServiceImpl implements IUserService {
  
 
     @Override
-    public User deleteUserByUserId(String userid) throws IUserServiceException{
+    public User deleteUserByUserId(String userid) throws ResourceNotFoundException{
         Optional<User> optional = regRepo.findById(userid);
         if (!optional.isPresent()) {
-            throw new IUserServiceException();
+            throw new ResourceNotFoundException();
         }
         regRepo.deleteById(userid);
         return optional.get();

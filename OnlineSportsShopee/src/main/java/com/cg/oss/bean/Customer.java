@@ -6,33 +6,44 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="CustomerNew")
+@Table(name="Customer")
 public class Customer
 {
 @Id
 private String userId;
+@NotEmpty(message = "Name is required")
 private String name;
+@Email(message = "Not a valid Email")
+@NotEmpty(message = "Email is required")
 private String email;
+@NotEmpty(message = "Contact number is required")
 private String contactNo;
+/*@NotEmpty(message = "Date of birth is required")
+@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+@JsonFormat(pattern = "MM/dd/yyyy")*/
 private LocalDate dob;
 @OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name="address1")
+@JoinColumn(name="doorNo")
 private Address address;
 
- public Customer(String userId, String name, String email, String contactNo, LocalDate dob) {
+ public Customer(String userId, String name, String email, String contactNo, LocalDate dob,Address address) {
 super();
 this.userId = userId;
 this.name = name;
 this.email = email;
 this.contactNo = contactNo;
 this.dob = dob;
+this.address = address;
 
 }
 public Customer() {
@@ -79,7 +90,7 @@ this.address = address;
 @Override
 public String toString() {
 return "Customer [userId=" + userId + ", name=" + name + ", email=" + email + ", contactNo=" + contactNo
-+ ", dob=" + dob + " ,address=\" + address + \" ]";
++ ", dob=" + dob + " ,address=" + address + "]";
 }
 
 }

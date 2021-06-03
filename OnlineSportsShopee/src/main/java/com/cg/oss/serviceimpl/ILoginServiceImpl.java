@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.cg.oss.bean.Login;
 import com.cg.oss.dao.ILoginRepository;
+import com.cg.oss.exception.ResourceNotFoundException;
 import com.cg.oss.service.ILoginService;
-import com.cg.oss.serviceexception.ILoginServiceException;
+
 
  
 
@@ -49,7 +50,7 @@ public class ILoginServiceImpl implements ILoginService {
  
 
     @Override
-    public String signout(String userId) throws ILoginServiceException {
+    public String signout(String userId) throws ResourceNotFoundException {
         Optional<Login> userfield = loginRepo.findById(userId);
         Login dbUsr = null;
         if (userfield.isPresent()) {
@@ -63,7 +64,7 @@ public class ILoginServiceImpl implements ILoginService {
             loginRepo.save(dbUsr);
             return "signout successfully";
         }
-        throw new ILoginServiceException();
+        throw new ResourceNotFoundException();
     }
     
     
