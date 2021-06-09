@@ -39,24 +39,18 @@ return custSer.getAllCustomers();
 }
 @RequestMapping(value = "/customer/update/{id}", method = RequestMethod.PUT)
 public Customer updateCustomer(@PathVariable("id") String custId,@Valid @RequestBody Customer customer) throws ResourceNotFoundException {
-try
-{
+
 Customer customer1 = custSer.updateCustomer(custId, customer);
 if(customer1==null)
 {
 throw new ResourceNotFoundException("No customers Found");
 }
 return customer1;
-}
-catch(ResourceNotFoundException e)
-{
-throw new ResourceNotFoundException("No customers found");
-}
+
 }
 @RequestMapping(value = "/customer/remove/{id}", method = RequestMethod.DELETE)
 public Customer removeCustomer(@PathVariable("id") String custId)throws ResourceNotFoundException {
-try
-{
+
 Customer customer =custSer.removeCustomer(custId);
 if(customer==null)
 {
@@ -64,25 +58,19 @@ throw new ResourceNotFoundException("Not Found");
 }
 return customer;
 }
-catch(ResourceNotFoundException e)
-{
-throw new ResourceNotFoundException("No customers Found");
-}
-}
+
+
 @RequestMapping(value ="/customer/{custId}", method = RequestMethod.GET)
 public Customer getCustomer(@PathVariable String custId) throws ResourceNotFoundException
 {
-try {
+
 Customer customer = custSer.getCustomer(custId);
 if(customer==null)
 {
 throw new ResourceNotFoundException("Not Found");
 }
 return customer;
-}
-catch(ResourceNotFoundException e) {
-throw new ResourceNotFoundException("No Customers Found");
-}
+
 }
 
 @ResponseStatus(value=HttpStatus.BAD_REQUEST)

@@ -64,7 +64,7 @@ customer.setContactNo("8763798706");
 restTemplate.put(getRootUrl() + "/customer/update/" + id, customer);
 Customer updatedCustomer = restTemplate.getForObject(getRootUrl() + "/customer/" + id, Customer.class);
 assertNotNull(updatedCustomer);
-//assertEquals(customer.getName(), updatedCustomer.getName());
+
 }
 
  @Test

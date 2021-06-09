@@ -119,7 +119,7 @@ public class ProductRestServiceTest {
         restTemplate.put(getRootUrl() + "/product/updateProduct/" + id, product);
         Product updateProduct = restTemplate.getForObject(getRootUrl() + "/product/byId/" + id, Product.class);      
         assertNotNull(updateProduct);
-    //assertEquals(product.getProductName(), updateProduct.getProductName());
+  
     }
 
  

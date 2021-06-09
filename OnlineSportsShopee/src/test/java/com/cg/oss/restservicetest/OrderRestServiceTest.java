@@ -92,13 +92,12 @@ public class OrderRestServiceTest
         order.setOrderId(102);
         order.setAmount(2500);
         order.setBillingDate(date);
-        order.setCustomer("Smith");
+      
         order.setPaymentMethod("Credit card");
         restTemplate.put(getRootUrl() + "/order/update/" + id, order);
         Order updatedOrder = restTemplate.getForObject(getRootUrl() + "/order/byId/" + id, Order.class);
         assertNotNull(updatedOrder);
-        //assertEquals(order.getAmount(), updatedOrder.getAmount());
-    }
+         }
 
  
 

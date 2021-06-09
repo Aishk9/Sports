@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
@@ -20,7 +21,7 @@ public class Payment {
 	    @NotEmpty(message = "status is required")
 		private String status;
 
-		@OneToOne(cascade = CascadeType.ALL)
+		@ManyToOne
 		@JoinColumn(name="card")
 		private Card card;
 

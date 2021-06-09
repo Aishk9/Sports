@@ -63,7 +63,7 @@ Address.setArea("Murugeshpallya");
 restTemplate.put(getRootUrl() + "/Address/update/" + doorNo, Address);
 Address updatedAddress = restTemplate.getForObject(getRootUrl() + "/Address/" + doorNo, Address.class);
 assertNotNull(updatedAddress);
-//assertEquals(Address.getStreet(), updatedAddress.getStreet());
+
 }
 
  @Test

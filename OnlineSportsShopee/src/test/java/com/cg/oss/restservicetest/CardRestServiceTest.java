@@ -76,7 +76,7 @@ public class CardRestServiceTest {
         restTemplate.put(getRootUrl() + "/Card/update/" + id, Card);
         Card updatedCard = restTemplate.getForObject(getRootUrl() + "/Card/" + id, Card.class);
        assertNotNull(updatedCard);
-	//assertEquals(Card.getCardName(), updatedCard.getCardName());
+	
     }
 
     @Test

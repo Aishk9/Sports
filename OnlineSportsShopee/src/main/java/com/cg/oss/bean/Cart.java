@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
@@ -26,6 +27,9 @@ public class Cart {
      private int quantity;
      private double price;
      private double total;
+     @ManyToOne
+     @JoinColumn(name = "productId")
+     private Product productId;
      public Cart() {
          
      }

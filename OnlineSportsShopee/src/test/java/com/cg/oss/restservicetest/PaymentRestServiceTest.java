@@ -66,14 +66,14 @@ public class PaymentRestServiceTest {
         restTemplate.put(getRootUrl() + "/payment/update/" + id, payment);
         Payment updatedPayment = restTemplate.getForObject(getRootUrl() + "/payment/" + id, Payment.class);
        assertNotNull(updatedPayment);
-//	assertEquals(payment.getType(), updatedPayment.getType());
+
     }
 
     @Test
     public void testDeletePayment() {
          int id = 115;
          Payment payment = restTemplate.getForObject(getRootUrl() + "/payment/" + id, Payment.class);
-//         assertNotNull(employee);
+
          restTemplate.delete(getRootUrl() + "/payment/delete/" + id);
          try {
               payment = restTemplate.getForObject(getRootUrl() + "/payment/" + id, Payment.class);

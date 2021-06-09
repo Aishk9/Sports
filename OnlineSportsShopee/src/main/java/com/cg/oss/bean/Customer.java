@@ -32,7 +32,7 @@ private String contactNo;
 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 @JsonFormat(pattern = "MM/dd/yyyy")*/
 private LocalDate dob;
-@OneToOne(cascade = CascadeType.ALL)
+@OneToOne
 @JoinColumn(name="doorNo")
 private Address address;
 

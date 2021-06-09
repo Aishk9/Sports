@@ -105,7 +105,7 @@ public class CartRestServiceTest {
         restTemplate.put(getRootUrl() + "/cart/updateProduct/" + id, cart);
         Cart updateCart = restTemplate.getForObject(getRootUrl() + "/cart/byId/" + id, Cart.class);      
         assertNotNull(updateCart);
-    //assertEquals(product.getProductName(), updateProduct.getProductName());
+    
     }
 
  

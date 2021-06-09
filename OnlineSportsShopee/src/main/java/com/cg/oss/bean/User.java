@@ -2,6 +2,8 @@ package com.cg.oss.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -20,28 +22,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
- 
-
- 
 @Component
 @Entity
-
- 
-
-
 @Table(name="UserNew")
 public class User {
   //Userid Validation
-    
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Login login;
     @Override
     public String toString() {
         return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
                 + lastname + "]";
     }
-
- 
-
- 
 
     public User() {
         super();

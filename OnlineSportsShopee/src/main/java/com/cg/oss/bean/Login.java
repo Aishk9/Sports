@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -28,12 +30,6 @@ import lombok.ToString;
 @Component
 @Entity
 @Table(name="LoginNew")
-
- 
-
- 
-
-
 public class Login {
 
  
@@ -62,6 +58,7 @@ public class Login {
     @NotEmpty(message="Please enter your password")
     private String password;
     private boolean isLoggedIn = false;
+    
     public int getId() {
         return id;
     }
